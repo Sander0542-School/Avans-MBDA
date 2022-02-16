@@ -18,7 +18,7 @@ public class OpenWeatherMap {
 
     private final RequestQueue requestQueue;
 
-    OpenWeatherMap(Context context) {
+    public OpenWeatherMap(Context context) {
         requestQueue = Volley.newRequestQueue(context);
     }
 
@@ -39,6 +39,7 @@ public class OpenWeatherMap {
                 .authority("api.openweathermap.org")
                 .appendPath("data")
                 .appendPath("2.5")
-                .appendQueryParameter("appid", API_KEY);
+                .appendQueryParameter("appid", API_KEY)
+                .appendQueryParameter("units", "metric");
     }
 }
