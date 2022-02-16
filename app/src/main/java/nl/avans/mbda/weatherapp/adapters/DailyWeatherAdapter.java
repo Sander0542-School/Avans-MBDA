@@ -1,5 +1,7 @@
 package nl.avans.mbda.weatherapp.adapters;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.SimpleDateFormat;
@@ -23,7 +26,7 @@ public class DailyWeatherAdapter extends RecyclerView.Adapter<DailyWeatherAdapte
     private static final String FORMAT_DAY = "EE";
     private static final String FORMAT_TEMP = "%.1f°";
     private static final String FORMAT_TEMP_FEEL = "RealFeel " + FORMAT_TEMP;
-    private static final String FORMAT_RAIN = "%.2f mm";
+    private static final String FORMAT_RAIN = "%.1f mm";
 
     private final List<Daily> forecastList;
 
@@ -40,12 +43,15 @@ public class DailyWeatherAdapter extends RecyclerView.Adapter<DailyWeatherAdapte
 
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
-        Locale locale = holder.itemView.getContext().getResources().getConfiguration().getLocales().get(0);
-
         final Daily daily = forecastList.get(position);
-        final Temp temp = daily.getTemp();
 
-//        holder.weatherIcon.
+        Context context = holder.itemView.getContext();
+        Resources resources = holder.itemView.getResources();
+        Locale locale = resources.getConfiguration().getLocales().get(0);
+
+        final int resourceId = resources.getIdentifier(String.format("weather_%s", daily.getWeather().get(0).getIcon()), "drawable", context.getPackageName());
+
+        holder.weatherIcon.setImageDrawable(ResourcesCompat.getDrawable(resources, resourceId, context.getTheme()));
         holder.weatherDay.setText(new SimpleDateFormat(FORMAT_DAY, locale).format(new Date(daily.getDt() * 1000)));
         holder.weatherTempDay.setText(String.format(locale, FORMAT_TEMP, daily.getTemp().getDay()));
         holder.weatherFeelDay.setText(String.format(locale, FORMAT_TEMP_FEEL, daily.getFeelsLike().getDay()));
