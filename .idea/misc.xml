@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/GitHub/Avans/MBDA/WeatherApp/app/src/main/res/layout/activity_main.xml" value="0.358695652173913" />
+        <entry key="..\:/GitHub/Avans/MBDA/WeatherApp/app/src/main/res/layout/fragment_detailed_weather.xml" value="0.358695652173913" />
+        <entry key="..\:/GitHub/Avans/MBDA/WeatherApp/app/src/main/res/xml/root_preferences.xml" value="0.358695652173913" />
       </map>
     </option>
   </component>
