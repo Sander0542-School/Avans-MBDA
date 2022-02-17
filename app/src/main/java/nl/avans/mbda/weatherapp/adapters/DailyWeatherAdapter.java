@@ -114,7 +114,9 @@ public class DailyWeatherAdapter extends RecyclerView.Adapter<DailyWeatherAdapte
             final Daily oldItem = oldForecast.get(oldItemPosition);
             final Daily newItem = newForecast.get(newItemPosition);
 
-            return oldItem.getTemp().getDay() == newItem.getTemp().getDay() && oldItem.getFeelsLike().getDay() == newItem.getFeelsLike().getDay() && oldItem.getRain().equals(newItem.getRain());
+            return oldItem.getTemp().getDay() == newItem.getTemp().getDay() &&
+                    oldItem.getFeelsLike().getDay() == newItem.getFeelsLike().getDay() &&
+                    oldItem.getRain() == newItem.getRain();
         }
     }
 }
