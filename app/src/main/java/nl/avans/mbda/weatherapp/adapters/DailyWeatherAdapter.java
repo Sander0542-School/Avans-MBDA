@@ -10,16 +10,17 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 import nl.avans.mbda.weatherapp.R;
 import nl.avans.mbda.weatherapp.models.Daily;
-import nl.avans.mbda.weatherapp.models.Temp;
 
 public class DailyWeatherAdapter extends RecyclerView.Adapter<DailyWeatherAdapter.Holder> {
 
@@ -28,11 +29,7 @@ public class DailyWeatherAdapter extends RecyclerView.Adapter<DailyWeatherAdapte
     private static final String FORMAT_TEMP_FEEL = "RealFeel " + FORMAT_TEMP;
     private static final String FORMAT_RAIN = "%.1f mm";
 
-    private final List<Daily> forecastList;
-
-    public DailyWeatherAdapter(List<Daily> forecastList) {
-        this.forecastList = forecastList;
-    }
+    private final List<Daily> data = new ArrayList<>();
 
     @NonNull
     @Override
@@ -43,7 +40,7 @@ public class DailyWeatherAdapter extends RecyclerView.Adapter<DailyWeatherAdapte
 
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
-        final Daily daily = forecastList.get(position);
+        final Daily daily = data.get(position);
 
         Context context = holder.itemView.getContext();
         Resources resources = holder.itemView.getResources();
@@ -60,16 +57,18 @@ public class DailyWeatherAdapter extends RecyclerView.Adapter<DailyWeatherAdapte
 
     @Override
     public int getItemCount() {
-        return forecastList.size();
+        return data.size();
     }
 
-    public void setItems(List<Daily> forecastList) {
-        this.forecastList.clear();
-        this.forecastList.addAll(forecastList);
-        this.notifyDataSetChanged();
+    public void setData(List<Daily> data) {
+        DiffUtil.DiffResult result = DiffUtil.calculateDiff(new DailyDiffCallback(this.data, data));
+
+        this.data.clear();
+        this.data.addAll(data);
+        result.dispatchUpdatesTo(this);
     }
 
-    class Holder extends RecyclerView.ViewHolder {
+    static class Holder extends RecyclerView.ViewHolder {
         private final TextView weatherDay;
         private final ImageView weatherIcon;
         private final TextView weatherTempDay;
@@ -84,6 +83,38 @@ public class DailyWeatherAdapter extends RecyclerView.Adapter<DailyWeatherAdapte
             weatherTempDay = itemView.findViewById(R.id.weather_temp_day);
             weatherFeelDay = itemView.findViewById(R.id.weather_feel_day);
             weatherRain = itemView.findViewById(R.id.weather_rain);
+        }
+    }
+
+    static class DailyDiffCallback extends DiffUtil.Callback {
+        DailyDiffCallback(List<Daily> oldForecast, List<Daily> newForecast) {
+            this.oldForecast = oldForecast;
+            this.newForecast = newForecast;
+        }
+
+        private final List<Daily> oldForecast, newForecast;
+
+        @Override
+        public int getOldListSize() {
+            return oldForecast.size();
+        }
+
+        @Override
+        public int getNewListSize() {
+            return newForecast.size();
+        }
+
+        @Override
+        public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
+            return oldForecast.get(oldItemPosition).getDt() == newForecast.get(newItemPosition).getDt();
+        }
+
+        @Override
+        public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
+            final Daily oldItem = oldForecast.get(oldItemPosition);
+            final Daily newItem = newForecast.get(newItemPosition);
+
+            return oldItem.getTemp().getDay() == newItem.getTemp().getDay() && oldItem.getFeelsLike().getDay() == newItem.getFeelsLike().getDay() && oldItem.getRain().equals(newItem.getRain());
         }
     }
 }

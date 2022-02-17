@@ -10,13 +10,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 import nl.avans.mbda.weatherapp.R;
 import nl.avans.mbda.weatherapp.adapters.DailyWeatherAdapter;
@@ -39,15 +37,15 @@ public class DailyWeatherFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        dailyWeatherAdapter = new DailyWeatherAdapter(new ArrayList<>());
+        dailyWeatherAdapter = new DailyWeatherAdapter();
 
         viewModel = new ViewModelProvider(requireActivity()).get(WeatherViewModel.class);
         viewModel.getOneCall().observe(getViewLifecycleOwner(), oneCall -> {
-            dailyWeatherAdapter.setItems(oneCall.getDaily());
+            dailyWeatherAdapter.setData(oneCall.getDaily());
         });
         OneCall oneCall = viewModel.getOneCall().getValue();
         if (oneCall != null) {
-            dailyWeatherAdapter.setItems(oneCall.getDaily());
+            dailyWeatherAdapter.setData(oneCall.getDaily());
         }
 
         recyclerView = view.findViewById(R.id.list_daily_weather);
