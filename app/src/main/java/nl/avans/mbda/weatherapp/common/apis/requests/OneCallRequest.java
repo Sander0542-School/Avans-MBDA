@@ -27,7 +27,7 @@ public class OneCallRequest extends Request<OneCall> {
         try {
             String json = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
 
-            return Response.success(Converter.fromJsonString(json), HttpHeaderParser.parseCacheHeaders(response));
+            return Response.success(Converter.fromJsonString(json, OneCall.class), HttpHeaderParser.parseCacheHeaders(response));
         } catch (IOException e) {
             return Response.error(new ParseError(e));
         }

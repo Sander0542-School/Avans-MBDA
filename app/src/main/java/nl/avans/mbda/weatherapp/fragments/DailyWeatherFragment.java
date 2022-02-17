@@ -10,14 +10,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
 import nl.avans.mbda.weatherapp.R;
 import nl.avans.mbda.weatherapp.adapters.DailyWeatherAdapter;
+import nl.avans.mbda.weatherapp.common.listeners.RecyclerItemClickListener;
 import nl.avans.mbda.weatherapp.models.OneCall;
 
 public class DailyWeatherFragment extends Fragment {
@@ -50,5 +53,16 @@ public class DailyWeatherFragment extends Fragment {
         recyclerView = view.findViewById(R.id.list_daily_weather);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(dailyWeatherAdapter);
+        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this.getContext(), recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                viewModel.setSelectedItem(position);
+            }
+
+            @Override
+            public void onLongItemClick(View view, int position) {
+                Toast.makeText(DailyWeatherFragment.this.getContext(), String.valueOf(position), Toast.LENGTH_SHORT).show();
+            }
+        }));
     }
 }
