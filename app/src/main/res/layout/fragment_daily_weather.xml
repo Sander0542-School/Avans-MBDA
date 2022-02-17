@@ -5,10 +5,17 @@
     android:layout_height="match_parent"
     tools:context=".fragments.DailyWeatherFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/list_daily_weather"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:listitem="@layout/item_daily_weather" />
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list_daily_weather"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/item_daily_weather" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </LinearLayout>

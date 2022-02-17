@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
         viewModel = new ViewModelProvider(this).get(WeatherViewModel.class);
         viewModel.getSelectedItem().observe(this, this::daySelected);
+        viewModel.getRefreshing().observe(this, this::refreshForecast);
 
         if (findViewById(R.id.frame_detailed_weather) != null) {
             mDualPanel = true;
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         openWeatherMap = new OpenWeatherMap(this);
-        openWeatherMap.OneCall(51.4107812, 5.5583965, response -> viewModel.setOneCall(response), error -> Log.e(TAG, error.getMessage(), error.getCause()));
+        refreshForecast(true);
     }
 
     @Override
@@ -90,6 +91,15 @@ public class MainActivity extends AppCompatActivity {
             } catch (JsonProcessingException e) {
                 Log.e(TAG, "Could not parse JSON", e);
             }
+        }
+    }
+
+    public void refreshForecast(Boolean refreshing) {
+        if (refreshing) {
+            openWeatherMap.OneCall(51.4107812, 5.5583965, response -> {
+                viewModel.setOneCall(response);
+                viewModel.setRefreshing(false);
+            }, error -> Log.e(TAG, error.getMessage(), error.getCause()));
         }
     }
 }
