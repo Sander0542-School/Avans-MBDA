@@ -1,34 +1,27 @@
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory app:title="@string/messages_header">
+    <PreferenceCategory app:title="@string/header_location">
+
+        <SwitchPreferenceCompat
+            app:defaultValue="false"
+            app:disableDependentsState="true"
+            app:icon="@drawable/ic_baseline_location_on_24"
+            app:key="current_location"
+            app:title="@string/current_location" />
 
         <EditTextPreference
-            app:key="signature"
-            app:title="@string/signature_title"
-            app:useSimpleSummaryProvider="true" />
+            app:defaultValue="51.4107812"
+            app:dependency="current_location"
+            app:icon="@drawable/ic_baseline_latitude_24"
+            app:key="latitude"
+            app:title="@string/latitude" />
 
-        <ListPreference
-            app:defaultValue="reply"
-            app:entries="@array/reply_entries"
-            app:entryValues="@array/reply_values"
-            app:key="reply"
-            app:title="@string/reply_title"
-            app:useSimpleSummaryProvider="true" />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory app:title="@string/sync_header">
-
-        <SwitchPreferenceCompat
-            app:key="sync"
-            app:title="@string/sync_title" />
-
-        <SwitchPreferenceCompat
-            app:dependency="sync"
-            app:key="attachment"
-            app:summaryOff="@string/attachment_summary_off"
-            app:summaryOn="@string/attachment_summary_on"
-            app:title="@string/attachment_title" />
+        <EditTextPreference
+            app:defaultValue="5.5583965"
+            app:dependency="current_location"
+            app:icon="@drawable/ic_baseline_longitude_24"
+            app:key="longitude"
+            app:title="@string/longitude" />
 
     </PreferenceCategory>
 
