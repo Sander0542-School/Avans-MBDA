@@ -12,4 +12,5 @@
     <string name="current_location">Current Location</string>
     <string name="latitude">Latitude</string>
     <string name="longitude">Longitude</string>
+    <string name="invalid_location">The stored location is not valid</string>
 </resources>
