@@ -36,6 +36,10 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
         currentLocationPreference = findPreference("current_location");
         if (currentLocationPreference != null) {
+            if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                currentLocationPreference.setChecked(false);
+            }
+
             currentLocationPreference.setOnPreferenceChangeListener((preference, newValue) -> {
                 boolean selected = (boolean) newValue;
                 if (selected && ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
