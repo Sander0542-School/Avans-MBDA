@@ -19,6 +19,7 @@ public class Converter {
 
     private static ObjectMapper getObjectMapper() {
         if (mapper == null) mapper = new ObjectMapper();
+        mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
         return mapper;
     }
 }
