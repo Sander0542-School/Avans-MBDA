@@ -2,6 +2,7 @@
     <string name="app_name" translatable="false">WeatherApp</string>
 
     <!-- Activities -->
+    <string name="title_activity_forecast">Forecast</string>
     <string name="title_activity_settings">Settings</string>
 
     <!-- Menu -->
@@ -13,4 +14,18 @@
     <string name="latitude">Latitude</string>
     <string name="longitude">Longitude</string>
     <string name="invalid_location">The stored location is not valid</string>
+
+    <!-- Weather -->
+    <string name="weather_temp" translatable="false">%1$.1f°</string>
+    <string name="weather_feels_like">Feels like %1$.1f°</string>
+    <string name="weather_temp_min">Minimum %1$.1f°</string>
+    <string name="weather_temp_max">Maximum %1$.1f°</string>
+
+    <!-- Buttons -->
+    <string name="button_forecast">Forecast</string>
+
+    <!-- Descriptions -->
+    <string name="description_location">Location</string>
+    <string name="description_weather">Weather</string>
+    <string name="location_lat_lon" translatable="false">%1$10.8f / %2$11.8f</string>
 </resources>
