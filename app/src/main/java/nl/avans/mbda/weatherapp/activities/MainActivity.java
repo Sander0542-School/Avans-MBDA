@@ -26,6 +26,7 @@ import com.google.android.gms.tasks.CancellationTokenSource;
 
 import nl.avans.mbda.weatherapp.R;
 import nl.avans.mbda.weatherapp.common.apis.OpenWeatherMap;
+import nl.avans.mbda.weatherapp.databinding.ActivityMainBinding;
 import nl.avans.mbda.weatherapp.fragments.DetailedWeatherFragment;
 import nl.avans.mbda.weatherapp.fragments.WeatherViewModel;
 import nl.avans.mbda.weatherapp.models.Converter;
@@ -36,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
     private static final double DEFAULT_LONGITUDE = 5.5583965;
 
     public static final String TAG = MainActivity.class.getName();
+
+    private ActivityMainBinding binding;
 
     private CancellationTokenSource cancellationSource;
 
@@ -51,7 +54,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         cancellationSource = new CancellationTokenSource();
 
@@ -62,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         viewModel.getSelectedItem().observe(this, this::daySelected);
         viewModel.getRefreshing().observe(this, this::refreshForecast);
 
-        if (findViewById(R.id.frame_detailed_weather) != null) {
+        if (binding.content.frameDetailedWeather != null) {
             mDualPanel = true;
 
             if (savedInstanceState == null) {
@@ -74,8 +78,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setSupportActionBar(binding.toolbar);
 
         openWeatherMap = new OpenWeatherMap(this);
         refreshForecast(true);
