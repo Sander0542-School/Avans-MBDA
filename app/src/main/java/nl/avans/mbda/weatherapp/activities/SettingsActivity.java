@@ -8,17 +8,17 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import nl.avans.mbda.weatherapp.R;
-import nl.avans.mbda.weatherapp.databinding.SettingsActivityBinding;
+import nl.avans.mbda.weatherapp.databinding.ActivitySettingsBinding;
 import nl.avans.mbda.weatherapp.fragments.SettingsFragment;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    private SettingsActivityBinding binding;
+    private ActivitySettingsBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = SettingsActivityBinding.inflate(getLayoutInflater());
+        binding = ActivitySettingsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         if (savedInstanceState == null) {
