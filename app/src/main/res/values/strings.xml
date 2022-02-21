@@ -16,7 +16,7 @@
     <string name="invalid_location">The stored location is not valid</string>
 
     <!-- Weather -->
-    <string name="weather_temp">%1$.1f°</string>
+    <string name="weather_temp" translatable="false">%1$.1f°</string>
     <string name="weather_feels_like">Feels like %1$.1f°</string>
     <string name="weather_temp_min">Minimum %1$.1f°</string>
     <string name="weather_temp_max">Maximum %1$.1f°</string>
@@ -27,5 +27,5 @@
     <!-- Descriptions -->
     <string name="description_location">Location</string>
     <string name="description_weather">Weather</string>
-    <string name="location_lat_lon">%1$10.8f / %2$11.8f</string>
+    <string name="location_lat_lon" translatable="false">%1$10.8f / %2$11.8f</string>
 </resources>
