@@ -6,6 +6,7 @@
     tools:context=".fragments.DetailedWeatherFragment">
 
     <TextView
+        android:id="@+id/weather_day"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="Hello" />
