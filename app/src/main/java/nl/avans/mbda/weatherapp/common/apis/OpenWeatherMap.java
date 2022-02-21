@@ -9,7 +9,9 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
 
+import nl.avans.mbda.weatherapp.common.apis.requests.CurrentRequest;
 import nl.avans.mbda.weatherapp.common.apis.requests.OneCallRequest;
+import nl.avans.mbda.weatherapp.models.current.Current;
 import nl.avans.mbda.weatherapp.models.onecall.OneCall;
 
 public class OpenWeatherMap {
@@ -31,6 +33,16 @@ public class OpenWeatherMap {
                 .toString();
 
         requestQueue.add(new OneCallRequest(url, listener, errorListener));
+    }
+
+    public void Current(double lat, double lon, Response.Listener<Current> listener, @Nullable Response.ErrorListener errorListener) {
+        String url = GetBaseUri()
+                .appendPath("weather")
+                .appendQueryParameter("lat", String.valueOf(lat))
+                .appendQueryParameter("lon", String.valueOf(lon))
+                .toString();
+
+        requestQueue.add(new CurrentRequest(url, listener, errorListener));
     }
 
     private static Uri.Builder GetBaseUri() {
