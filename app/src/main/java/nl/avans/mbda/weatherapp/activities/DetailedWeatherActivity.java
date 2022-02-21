@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import java.io.IOException;
 
 import nl.avans.mbda.weatherapp.R;
+import nl.avans.mbda.weatherapp.databinding.ActivityDetailedWeatherBinding;
 import nl.avans.mbda.weatherapp.fragments.WeatherViewModel;
 import nl.avans.mbda.weatherapp.models.Converter;
 import nl.avans.mbda.weatherapp.models.OneCall;
@@ -22,12 +23,15 @@ public class DetailedWeatherActivity extends AppCompatActivity {
     public static final String NAME_ONE_CALL = "OneCall";
     public static final String NAME_SELECTED_ITEM = "SelectedItem";
 
+    private ActivityDetailedWeatherBinding binding;
+
     private WeatherViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detailed_weather);
+        binding = ActivityDetailedWeatherBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         viewModel = new ViewModelProvider(this).get(WeatherViewModel.class);
 
@@ -39,7 +43,7 @@ public class DetailedWeatherActivity extends AppCompatActivity {
             return;
         }
 
-        setSupportActionBar(findViewById(R.id.toolbar));
+        setSupportActionBar(binding.toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
