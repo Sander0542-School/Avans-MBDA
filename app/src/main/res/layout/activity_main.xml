@@ -14,4 +14,10 @@
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize" />
 
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_current_weather"
+        android:name="nl.avans.mbda.weatherapp.fragments.CurrentWeatherFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 </LinearLayout>
