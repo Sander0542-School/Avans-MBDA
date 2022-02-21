@@ -8,14 +8,19 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import nl.avans.mbda.weatherapp.R;
+import nl.avans.mbda.weatherapp.databinding.SettingsActivityBinding;
 import nl.avans.mbda.weatherapp.fragments.SettingsFragment;
 
 public class SettingsActivity extends AppCompatActivity {
 
+    private SettingsActivityBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.settings_activity);
+        binding = SettingsActivityBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
         if (savedInstanceState == null) {
             getSupportFragmentManager()
                     .beginTransaction()
@@ -23,7 +28,7 @@ public class SettingsActivity extends AppCompatActivity {
                     .commit();
         }
 
-        setSupportActionBar(findViewById(R.id.toolbar));
+        setSupportActionBar(binding.toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
