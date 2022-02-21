@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Locale;
 
 import nl.avans.mbda.weatherapp.R;
+import nl.avans.mbda.weatherapp.databinding.ItemDailyWeatherBinding;
 import nl.avans.mbda.weatherapp.models.Daily;
 
 public class DailyWeatherAdapter extends RecyclerView.Adapter<DailyWeatherAdapter.Holder> {
@@ -34,8 +35,7 @@ public class DailyWeatherAdapter extends RecyclerView.Adapter<DailyWeatherAdapte
     @NonNull
     @Override
     public Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_daily_weather, parent, false);
-        return new Holder(itemView);
+        return new Holder(ItemDailyWeatherBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
     }
 
     @Override
@@ -48,11 +48,11 @@ public class DailyWeatherAdapter extends RecyclerView.Adapter<DailyWeatherAdapte
 
         final int resourceId = resources.getIdentifier(String.format("weather_%s", daily.getWeather().get(0).getIcon()), "drawable", context.getPackageName());
 
-        holder.weatherIcon.setImageDrawable(ResourcesCompat.getDrawable(resources, resourceId, context.getTheme()));
-        holder.weatherDay.setText(new SimpleDateFormat(FORMAT_DAY, locale).format(new Date(daily.getDt() * 1000)));
-        holder.weatherTempDay.setText(String.format(locale, FORMAT_TEMP, daily.getTemp().getDay()));
-        holder.weatherFeelDay.setText(String.format(locale, FORMAT_TEMP_FEEL, daily.getFeelsLike().getDay()));
-        holder.weatherRain.setText(String.format(locale, FORMAT_RAIN, daily.getRain() == null ? 0 : daily.getRain()));
+        holder.binding.weatherIcon.setImageDrawable(ResourcesCompat.getDrawable(resources, resourceId, context.getTheme()));
+        holder.binding.weatherDay.setText(new SimpleDateFormat(FORMAT_DAY, locale).format(new Date(daily.getDt() * 1000)));
+        holder.binding.weatherTempDay.setText(String.format(locale, FORMAT_TEMP, daily.getTemp().getDay()));
+        holder.binding.weatherFeelDay.setText(String.format(locale, FORMAT_TEMP_FEEL, daily.getFeelsLike().getDay()));
+        holder.binding.weatherRain.setText(String.format(locale, FORMAT_RAIN, daily.getRain() == null ? 0 : daily.getRain()));
     }
 
     @Override
@@ -69,20 +69,12 @@ public class DailyWeatherAdapter extends RecyclerView.Adapter<DailyWeatherAdapte
     }
 
     static class Holder extends RecyclerView.ViewHolder {
-        private final TextView weatherDay;
-        private final ImageView weatherIcon;
-        private final TextView weatherTempDay;
-        private final TextView weatherFeelDay;
-        private final TextView weatherRain;
+        private final ItemDailyWeatherBinding binding;
 
-        public Holder(@NonNull View itemView) {
-            super(itemView);
+        public Holder(@NonNull ItemDailyWeatherBinding binding) {
+            super(binding.getRoot());
 
-            weatherDay = itemView.findViewById(R.id.weather_day);
-            weatherIcon = itemView.findViewById(R.id.weather_icon);
-            weatherTempDay = itemView.findViewById(R.id.weather_temp_day);
-            weatherFeelDay = itemView.findViewById(R.id.weather_feel_day);
-            weatherRain = itemView.findViewById(R.id.weather_rain);
+            this.binding = binding;
         }
     }
 
