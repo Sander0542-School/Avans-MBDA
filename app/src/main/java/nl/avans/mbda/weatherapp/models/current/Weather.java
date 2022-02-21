@@ -1,4 +1,4 @@
-package nl.avans.mbda.weatherapp.models;
+package nl.avans.mbda.weatherapp.models.current;
 
 import com.fasterxml.jackson.annotation.*;
 

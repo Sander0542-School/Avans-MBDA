@@ -11,9 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import nl.avans.mbda.weatherapp.R;
 import nl.avans.mbda.weatherapp.databinding.FragmentDetailedWeatherBinding;
-import nl.avans.mbda.weatherapp.models.Daily;
+import nl.avans.mbda.weatherapp.models.onecall.Daily;
 
 public class DetailedWeatherFragment extends Fragment {
 
