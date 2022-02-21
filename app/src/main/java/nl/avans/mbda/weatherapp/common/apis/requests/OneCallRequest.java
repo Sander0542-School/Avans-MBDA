@@ -11,7 +11,7 @@ import com.android.volley.toolbox.HttpHeaderParser;
 import java.io.IOException;
 
 import nl.avans.mbda.weatherapp.models.Converter;
-import nl.avans.mbda.weatherapp.models.OneCall;
+import nl.avans.mbda.weatherapp.models.onecall.OneCall;
 
 public class OneCallRequest extends Request<OneCall> {
 

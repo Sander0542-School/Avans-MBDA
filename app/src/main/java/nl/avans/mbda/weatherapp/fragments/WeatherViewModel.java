@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import nl.avans.mbda.weatherapp.models.OneCall;
+import nl.avans.mbda.weatherapp.models.onecall.OneCall;
 
 public class WeatherViewModel extends ViewModel {
     private final MutableLiveData<OneCall> oneCall = new MutableLiveData<>();

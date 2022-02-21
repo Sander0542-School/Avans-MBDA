@@ -7,21 +7,16 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-
-import nl.avans.mbda.weatherapp.R;
 import nl.avans.mbda.weatherapp.adapters.DailyWeatherAdapter;
 import nl.avans.mbda.weatherapp.common.listeners.RecyclerItemClickListener;
 import nl.avans.mbda.weatherapp.databinding.FragmentDailyWeatherBinding;
-import nl.avans.mbda.weatherapp.models.OneCall;
+import nl.avans.mbda.weatherapp.models.onecall.OneCall;
 
 public class DailyWeatherFragment extends Fragment {
 

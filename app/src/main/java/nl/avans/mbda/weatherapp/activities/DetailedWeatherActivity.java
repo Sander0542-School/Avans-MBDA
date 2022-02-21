@@ -5,18 +5,15 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 
 import java.io.IOException;
 
-import nl.avans.mbda.weatherapp.R;
 import nl.avans.mbda.weatherapp.databinding.ActivityDetailedWeatherBinding;
 import nl.avans.mbda.weatherapp.fragments.WeatherViewModel;
 import nl.avans.mbda.weatherapp.models.Converter;
-import nl.avans.mbda.weatherapp.models.OneCall;
+import nl.avans.mbda.weatherapp.models.onecall.OneCall;
 
 public class DetailedWeatherActivity extends AppCompatActivity {
 

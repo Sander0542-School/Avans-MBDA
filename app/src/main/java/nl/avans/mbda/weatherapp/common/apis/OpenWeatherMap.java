@@ -10,7 +10,7 @@ import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
 
 import nl.avans.mbda.weatherapp.common.apis.requests.OneCallRequest;
-import nl.avans.mbda.weatherapp.models.OneCall;
+import nl.avans.mbda.weatherapp.models.onecall.OneCall;
 
 public class OpenWeatherMap {
 

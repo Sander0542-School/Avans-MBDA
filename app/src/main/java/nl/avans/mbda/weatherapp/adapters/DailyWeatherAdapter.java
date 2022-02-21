@@ -3,10 +3,7 @@ package nl.avans.mbda.weatherapp.adapters;
 import android.content.Context;
 import android.content.res.Resources;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
@@ -19,9 +16,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import nl.avans.mbda.weatherapp.R;
 import nl.avans.mbda.weatherapp.databinding.ItemDailyWeatherBinding;
-import nl.avans.mbda.weatherapp.models.Daily;
+import nl.avans.mbda.weatherapp.models.onecall.Daily;
 
 public class DailyWeatherAdapter extends RecyclerView.Adapter<DailyWeatherAdapter.Holder> {
 
