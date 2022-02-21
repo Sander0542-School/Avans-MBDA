@@ -12,19 +12,27 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import nl.avans.mbda.weatherapp.R;
+import nl.avans.mbda.weatherapp.databinding.FragmentDetailedWeatherBinding;
+import nl.avans.mbda.weatherapp.models.Daily;
 
 public class DetailedWeatherFragment extends Fragment {
 
     private WeatherViewModel viewModel;
+    private FragmentDetailedWeatherBinding binding;
+    private Daily daily;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_detailed_weather, container, false);
+        binding = FragmentDetailedWeatherBinding.inflate(inflater, container, false);
+        return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         viewModel = new ViewModelProvider(requireActivity()).get(WeatherViewModel.class);
+        viewModel.getSelectedItem().observe(getViewLifecycleOwner(), selectedItem -> {
+            daily = viewModel.getOneCall().getValue().getDaily().get(selectedItem);
+        });
     }
 }
