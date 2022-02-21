@@ -13,4 +13,8 @@
     <string name="latitude">Latitude</string>
     <string name="longitude">Longitude</string>
     <string name="invalid_location">The stored location is not valid</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="app_widget_description">Display the current weather</string>
+    <string name="description_location">Location</string>
+    <string name="description_temperature">Temperature</string>
 </resources>

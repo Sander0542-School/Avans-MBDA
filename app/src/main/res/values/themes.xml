@@ -13,4 +13,10 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="Theme.WeatherApp.AppWidgetContainer" parent="Theme.WeatherApp">
+        <item name="appWidgetRadius">16dp</item>
+        <item name="appWidgetInnerRadius">8dp</item>
+        <item name="appWidgetPadding">4dp</item>
+    </style>
 </resources>
