@@ -54,8 +54,9 @@ public class DetailedWeatherFragment extends Fragment {
             Locale locale = resources.getConfiguration().getLocales().get(0);
 
             binding.weatherDay.setText(new SimpleDateFormat(Formats.FORMAT_DAY_FULL, locale).format(new Date(daily.getDt() * 1000)));
-            binding.temperatureTextView.setText(String.format(locale, Formats.FORMAT_TEMP, daily.getTemp().getDay()));
+            binding.temperatureTextView.setText(String.format(locale, Formats.FORMAT_TEMP_EMPTY, daily.getTemp().getDay()));
             binding.humidityTextView.setText(String.format(locale, Formats.FORMAT_HUMIDITY, daily.getHumidity()));
+            binding.minMaxTextView.setText(String.format(locale, Formats.FORMAT_MIN_MAX_TEMP, daily.getTemp().getMin(), daily.getTemp().getMax()));
 
             Button button = binding.button;
             button.setOnClickListener(new View.OnClickListener() {

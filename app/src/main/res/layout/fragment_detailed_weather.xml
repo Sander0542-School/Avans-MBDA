@@ -25,15 +25,6 @@
                 android:textColor="#FFFFFF"
                 android:textSize="22sp" />
 
-            <TextView
-                android:id="@+id/countryTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Country"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -44,9 +35,9 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="end|center"
                     android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
                     android:orientation="horizontal">
 
                     <TextView
@@ -66,15 +57,6 @@
                         android:textSize="22sp" />
                 </LinearLayout>
 
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
-                    android:padding="10dp">
-
-
-                </RelativeLayout>
             </LinearLayout>
 
             <TextView
@@ -88,7 +70,7 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/weatherDescriptionTextView"
+                android:id="@+id/minMaxTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -100,7 +82,7 @@
                 android:id="@+id/button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Button" />
+                android:text="Open in maps" />
         </LinearLayout>
     </ScrollView>
 
