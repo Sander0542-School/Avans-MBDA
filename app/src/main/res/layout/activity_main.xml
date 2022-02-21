@@ -14,8 +14,4 @@
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize" />
 
-    <include
-        android:id="@+id/content"
-        layout="@layout/content_main" />
-
 </LinearLayout>
