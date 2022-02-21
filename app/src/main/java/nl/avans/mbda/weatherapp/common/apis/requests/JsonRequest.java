@@ -12,7 +12,7 @@ import java.io.IOException;
 
 import nl.avans.mbda.weatherapp.models.Converter;
 
-public class JsonRequest<T> extends Request<T> {
+public abstract class JsonRequest<T> extends Request<T> {
 
     private final Response.Listener<T> mListener;
     private final Class<T> mType;
