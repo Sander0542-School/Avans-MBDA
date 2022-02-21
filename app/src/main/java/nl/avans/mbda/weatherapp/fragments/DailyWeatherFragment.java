@@ -17,12 +17,13 @@ import nl.avans.mbda.weatherapp.adapters.DailyWeatherAdapter;
 import nl.avans.mbda.weatherapp.common.listeners.RecyclerItemClickListener;
 import nl.avans.mbda.weatherapp.databinding.FragmentDailyWeatherBinding;
 import nl.avans.mbda.weatherapp.models.onecall.OneCall;
+import nl.avans.mbda.weatherapp.viewmodels.ForecastViewModel;
 
 public class DailyWeatherFragment extends Fragment {
 
     private FragmentDailyWeatherBinding binding;
 
-    private WeatherViewModel viewModel;
+    private ForecastViewModel viewModel;
 
     private DailyWeatherAdapter dailyWeatherAdapter;
 
@@ -38,7 +39,7 @@ public class DailyWeatherFragment extends Fragment {
 
         dailyWeatherAdapter = new DailyWeatherAdapter();
 
-        viewModel = new ViewModelProvider(requireActivity()).get(WeatherViewModel.class);
+        viewModel = new ViewModelProvider(requireActivity()).get(ForecastViewModel.class);
         viewModel.getOneCall().observe(getViewLifecycleOwner(), oneCall -> dailyWeatherAdapter.setData(oneCall.getDaily()));
         viewModel.getRefreshing().observe(getViewLifecycleOwner(), refreshing -> binding.swipeLayout.setRefreshing(refreshing));
         OneCall oneCall = viewModel.getOneCall().getValue();

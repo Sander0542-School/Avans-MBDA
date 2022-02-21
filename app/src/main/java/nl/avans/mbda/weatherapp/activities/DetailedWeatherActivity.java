@@ -11,7 +11,7 @@ import android.view.MenuItem;
 import java.io.IOException;
 
 import nl.avans.mbda.weatherapp.databinding.ActivityDetailedWeatherBinding;
-import nl.avans.mbda.weatherapp.fragments.WeatherViewModel;
+import nl.avans.mbda.weatherapp.viewmodels.ForecastViewModel;
 import nl.avans.mbda.weatherapp.models.Converter;
 import nl.avans.mbda.weatherapp.models.onecall.OneCall;
 
@@ -22,7 +22,7 @@ public class DetailedWeatherActivity extends AppCompatActivity {
 
     private ActivityDetailedWeatherBinding binding;
 
-    private WeatherViewModel viewModel;
+    private ForecastViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +30,7 @@ public class DetailedWeatherActivity extends AppCompatActivity {
         binding = ActivityDetailedWeatherBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        viewModel = new ViewModelProvider(this).get(WeatherViewModel.class);
+        viewModel = new ViewModelProvider(this).get(ForecastViewModel.class);
 
         try {
             viewModel.setOneCall(Converter.fromJsonString(getIntent().getStringExtra(NAME_ONE_CALL), OneCall.class));

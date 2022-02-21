@@ -2,6 +2,7 @@
     <string name="app_name" translatable="false">WeatherApp</string>
 
     <!-- Activities -->
+    <string name="title_activity_forecast">Forecast</string>
     <string name="title_activity_settings">Settings</string>
 
     <!-- Menu -->
