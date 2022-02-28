@@ -60,7 +60,7 @@ public class DetailedWeatherActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_forecast, menu);
+        getMenuInflater().inflate(R.menu.menu_detailed_weather, menu);
         return true;
     }
 
