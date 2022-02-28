@@ -1,12 +1,12 @@
-package nl.avans.mbda.weatherapp.fragments;
+package nl.avans.mbda.weatherapp.viewmodels;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import nl.avans.mbda.weatherapp.models.OneCall;
+import nl.avans.mbda.weatherapp.models.onecall.OneCall;
 
-public class WeatherViewModel extends ViewModel {
+public class ForecastViewModel extends ViewModel {
     private final MutableLiveData<OneCall> oneCall = new MutableLiveData<>();
     private final MutableLiveData<Integer> selectedItem = new MutableLiveData<>();
     private final MutableLiveData<Boolean> refreshing = new MutableLiveData<>();

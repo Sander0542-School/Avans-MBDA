@@ -26,11 +26,12 @@ import nl.avans.mbda.weatherapp.R;
 import nl.avans.mbda.weatherapp.adapters.DailyWeatherAdapter;
 import nl.avans.mbda.weatherapp.common.Formats;
 import nl.avans.mbda.weatherapp.databinding.FragmentDetailedWeatherBinding;
-import nl.avans.mbda.weatherapp.models.Daily;
+import nl.avans.mbda.weatherapp.models.onecall.Daily;
+import nl.avans.mbda.weatherapp.viewmodels.ForecastViewModel;
 
 public class DetailedWeatherFragment extends Fragment {
 
-    private WeatherViewModel viewModel;
+    private ForecastViewModel viewModel;
     private FragmentDetailedWeatherBinding binding;
     private Daily daily;
     private SharedPreferences preferences;
@@ -46,7 +47,7 @@ public class DetailedWeatherFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        viewModel = new ViewModelProvider(requireActivity()).get(WeatherViewModel.class);
+        viewModel = new ViewModelProvider(requireActivity()).get(ForecastViewModel.class);
         viewModel.getSelectedItem().observe(getViewLifecycleOwner(), selectedItem -> {
             daily = viewModel.getOneCall().getValue().getDaily().get(selectedItem);
 
