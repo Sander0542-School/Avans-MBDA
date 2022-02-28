@@ -22,6 +22,7 @@
         android:layout_height="48dp"
         android:layout_marginVertical="8dp"
         android:layout_marginStart="16dp"
+        android:contentDescription="@string/description_weather_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/weather_day"
         app:layout_constraintTop_toTopOf="parent"
@@ -59,6 +60,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="5mm" />
+        tools:text="5 mm" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
