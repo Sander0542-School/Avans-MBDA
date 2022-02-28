@@ -1,12 +1,9 @@
 package nl.avans.mbda.weatherapp.fragments;
 
 import android.Manifest;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +18,6 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.preference.PreferenceManager;
 
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
@@ -38,7 +34,6 @@ public class DetailedWeatherFragment extends Fragment {
     private ForecastViewModel viewModel;
     private FragmentDetailedWeatherBinding binding;
     private Daily daily;
-    private SharedPreferences preferences;
 
     private ActivityResultLauncher<String> permissionLauncher;
     private ActivityResultLauncher<String> imagePickerLauncher;
@@ -68,7 +63,6 @@ public class DetailedWeatherFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentDetailedWeatherBinding.inflate(inflater, container, false);
-        preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         return binding.getRoot();
     }
 
@@ -87,17 +81,6 @@ public class DetailedWeatherFragment extends Fragment {
             binding.temperatureTextView.setText(String.format(locale, Formats.FORMAT_TEMP_EMPTY, daily.getTemp().getDay()));
             binding.humidityTextView.setText(String.format(locale, Formats.FORMAT_HUMIDITY, daily.getHumidity()));
             binding.minMaxTextView.setText(String.format(locale, Formats.FORMAT_MIN_MAX_TEMP, daily.getTemp().getMin(), daily.getTemp().getMax()));
-
-            Button button = binding.button;
-            button.setOnClickListener(v -> {
-                String lat = preferences.getString("latitude", null);
-                String lon = preferences.getString("longitude", null);
-                String uri = String.format("google.streetview:cbll=%s,%s", lat, lon);
-                Uri gmmIntentUri = Uri.parse(uri);
-                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-                mapIntent.setPackage("com.google.android.apps.maps");
-                startActivity(mapIntent);
-            });
 
             Button buttonWallpaper = binding.buttonWallpaper;
             buttonWallpaper.setOnClickListener(v -> {

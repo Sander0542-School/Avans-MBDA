@@ -15,4 +15,6 @@
     <string name="title_activity_forecast">Voorspelling</string>
     <string name="button_forecast">Voorspelling</string>
     <string name="description_weather_icon">Weer Icoon</string>
+    <string name="menu_maps">Openen in kaarten</string>
+    <string name="menu_background">Achtergrond veranderen</string>
 </resources>

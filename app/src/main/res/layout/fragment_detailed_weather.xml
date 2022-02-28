@@ -80,12 +80,6 @@
                 android:textSize="14sp" />
 
             <Button
-                android:id="@+id/button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Open in maps" />
-
-            <Button
                 android:id="@+id/button_wallpaper"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
