@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -49,6 +50,8 @@ public class DetailedWeatherFragment extends Fragment {
         permissionLauncher = registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
             if (isGranted) {
                 imagePickerLauncher.launch("image/*");
+            } else {
+                Toast.makeText(getContext(), "The app needs storage access to select the background image.", Toast.LENGTH_LONG).show();
             }
         });
 
