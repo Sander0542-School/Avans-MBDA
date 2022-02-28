@@ -31,8 +31,6 @@ public class DetailedWeatherFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         viewModel = new ViewModelProvider(requireActivity()).get(ForecastViewModel.class);
-        viewModel.getSelectedItem().observe(getViewLifecycleOwner(), selectedItem -> {
-            daily = viewModel.getOneCall().getValue().getDaily().get(selectedItem);
-        });
+        viewModel.getSelectedItem().observe(getViewLifecycleOwner(), selectedItem -> daily = viewModel.getOneCall().getValue().getDaily().get(selectedItem));
     }
 }
