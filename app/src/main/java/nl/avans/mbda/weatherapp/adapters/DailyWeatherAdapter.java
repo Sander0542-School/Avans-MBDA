@@ -16,15 +16,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import nl.avans.mbda.weatherapp.R;
+import nl.avans.mbda.weatherapp.common.Formats;
 import nl.avans.mbda.weatherapp.databinding.ItemDailyWeatherBinding;
 import nl.avans.mbda.weatherapp.models.onecall.Daily;
 
 public class DailyWeatherAdapter extends RecyclerView.Adapter<DailyWeatherAdapter.Holder> {
-
-    private static final String FORMAT_DAY = "EE";
-    private static final String FORMAT_TEMP = "%.1f°";
-    private static final String FORMAT_TEMP_FEEL = "RealFeel " + FORMAT_TEMP;
-    private static final String FORMAT_RAIN = "%.1f mm";
 
     private final List<Daily> data = new ArrayList<>();
 
@@ -45,10 +42,10 @@ public class DailyWeatherAdapter extends RecyclerView.Adapter<DailyWeatherAdapte
         final int resourceId = resources.getIdentifier(String.format("weather_%s", daily.getWeather().get(0).getIcon()), "drawable", context.getPackageName());
 
         holder.binding.weatherIcon.setImageDrawable(ResourcesCompat.getDrawable(resources, resourceId, context.getTheme()));
-        holder.binding.weatherDay.setText(new SimpleDateFormat(FORMAT_DAY, locale).format(new Date(daily.getDt() * 1000)));
-        holder.binding.weatherTempDay.setText(String.format(locale, FORMAT_TEMP, daily.getTemp().getDay()));
-        holder.binding.weatherFeelDay.setText(String.format(locale, FORMAT_TEMP_FEEL, daily.getFeelsLike().getDay()));
-        holder.binding.weatherRain.setText(String.format(locale, FORMAT_RAIN, daily.getRain() == null ? 0 : daily.getRain()));
+        holder.binding.weatherDay.setText(new SimpleDateFormat(Formats.FORMAT_DAY, locale).format(new Date(daily.getDt() * 1000)));
+        holder.binding.weatherTempDay.setText(String.format(locale, Formats.FORMAT_TEMP, daily.getTemp().getDay()));
+        holder.binding.weatherFeelDay.setText(String.format(locale, Formats.FORMAT_TEMP_FEEL, daily.getFeelsLike().getDay()));
+        holder.binding.weatherRain.setText(String.format(locale, Formats.FORMAT_RAIN, daily.getRain() == null ? 0 : daily.getRain()));
     }
 
     @Override

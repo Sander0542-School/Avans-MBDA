@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_activity_settings">Instellingen</string>
+    <string name="menu_settings">Instellingen</string>
+    <string name="header_location">Locatie</string>
+    <string name="current_location">Huidige Locatie</string>
+    <string name="latitude">Breedtegraad</string>
+    <string name="longitude">Lengtegraad</string>
+    <string name="invalid_location">De opgeslagen locatie is niet geldig</string>
+    <string name="weather_feels_like">Voelt als %1$.1f°</string>
+    <string name="weather_temp_min">Minimaal %1$.1f°</string>
+    <string name="weather_temp_max">Maximaal %1$.1f°</string>
+    <string name="description_location">Locatie</string>
+    <string name="description_weather">Weer</string>
+    <string name="title_activity_forecast">Voorspelling</string>
+    <string name="button_forecast">Voorspelling</string>
+    <string name="description_weather_icon">Weer Icoon</string>
+    <string name="menu_maps">Openen in kaarten</string>
+    <string name="menu_background">Achtergrond veranderen</string>
+</resources>

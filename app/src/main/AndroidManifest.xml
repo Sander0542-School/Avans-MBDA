@@ -5,6 +5,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
 
     <application
         android:allowBackup="true"
@@ -26,8 +28,13 @@
         </receiver>
 
         <activity
+            android:name=".activities.ForecastActivity"
+            android:exported="false"
+            android:label="@string/title_activity_forecast" />
+        <activity
             android:name=".activities.DetailedWeatherActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="@string/title_activity_forecast" />
         <activity
             android:name=".activities.SettingsActivity"
             android:exported="false"
