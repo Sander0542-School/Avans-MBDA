@@ -3,6 +3,7 @@ package nl.avans.mbda.weatherapp.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import nl.avans.mbda.weatherapp.R;
 import nl.avans.mbda.weatherapp.common.Constants;
 import nl.avans.mbda.weatherapp.common.apis.OpenWeatherMap;
+import nl.avans.mbda.weatherapp.common.utils.BackgroundUtil;
+import nl.avans.mbda.weatherapp.common.utils.MenuUtil;
 import nl.avans.mbda.weatherapp.databinding.ActivityForecastBinding;
 import nl.avans.mbda.weatherapp.fragments.DetailedWeatherFragment;
 import nl.avans.mbda.weatherapp.viewmodels.ForecastViewModel;
@@ -37,6 +40,7 @@ public class ForecastActivity extends AppCompatActivity {
     private OpenWeatherMap openWeatherMap;
 
     private DetailedWeatherFragment detailedWeatherFragment;
+    private BackgroundUtil backgroundUtil;
     private boolean mDualPanel = false;
 
     @Override
@@ -44,6 +48,8 @@ public class ForecastActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityForecastBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        backgroundUtil = new BackgroundUtil(this, binding.getRoot());
 
         latitude = getIntent().getDoubleExtra(NAME_LATITUDE, Constants.DEFAULT_LATITUDE);
         longitude = getIntent().getDoubleExtra(NAME_LONGITUDE, Constants.DEFAULT_LONGITUDE);
@@ -76,9 +82,21 @@ public class ForecastActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_detailed_weather, menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             finish();
+        }
+        if (MenuUtil.openMaps(this, item.getItemId(), viewModel.getOneCall().getValue())) {
+            return true;
+        }
+        if (MenuUtil.changeBackground(backgroundUtil, item.getItemId())) {
+            return true;
         }
 
         return super.onOptionsItemSelected(item);

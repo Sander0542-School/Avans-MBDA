@@ -15,6 +15,8 @@ import java.io.IOException;
 import java.util.Locale;
 
 import nl.avans.mbda.weatherapp.R;
+import nl.avans.mbda.weatherapp.common.utils.BackgroundUtil;
+import nl.avans.mbda.weatherapp.common.utils.MenuUtil;
 import nl.avans.mbda.weatherapp.databinding.ActivityDetailedWeatherBinding;
 import nl.avans.mbda.weatherapp.models.Converter;
 import nl.avans.mbda.weatherapp.models.onecall.OneCall;
@@ -28,12 +30,15 @@ public class DetailedWeatherActivity extends AppCompatActivity {
     private ActivityDetailedWeatherBinding binding;
 
     private ForecastViewModel viewModel;
+    private BackgroundUtil backgroundUtil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityDetailedWeatherBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        backgroundUtil = new BackgroundUtil(this, binding.getRoot());
 
         viewModel = new ViewModelProvider(this).get(ForecastViewModel.class);
 
@@ -55,7 +60,7 @@ public class DetailedWeatherActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_forecast, menu);
         return true;
     }
 
@@ -65,12 +70,10 @@ public class DetailedWeatherActivity extends AppCompatActivity {
             finish();
             return true;
         }
-        if (item.getItemId() == R.id.menu_item_maps) {
-            OneCall oneCall = viewModel.getOneCall().getValue();
-            if (oneCall == null) return true;
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(String.format(Locale.US, "google.streetview:cbll=%f,%f", oneCall.getLat(), oneCall.getLon())));
-            intent.setPackage("com.google.android.apps.maps");
-            startActivity(intent);
+        if (MenuUtil.openMaps(this, item.getItemId(), viewModel.getOneCall().getValue())) {
+            return true;
+        }
+        if (MenuUtil.changeBackground(backgroundUtil, item.getItemId())) {
             return true;
         }
 
