@@ -1,8 +1,6 @@
 package nl.avans.mbda.weatherapp.fragments;
 
 import android.Manifest;
-import android.content.ContentResolver;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -24,13 +22,11 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.preference.PreferenceManager;
 
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import nl.avans.mbda.weatherapp.R;
 import nl.avans.mbda.weatherapp.common.Formats;
 import nl.avans.mbda.weatherapp.databinding.FragmentDetailedWeatherBinding;
 import nl.avans.mbda.weatherapp.models.onecall.Daily;
@@ -57,13 +53,11 @@ public class DetailedWeatherFragment extends Fragment {
         });
 
         imagePickerLauncher = registerForActivityResult(new ActivityResultContracts.GetContent(), uri -> {
-            Drawable yourDrawable;
             try {
-                InputStream inputStream = tryGetContentResolver(getContext()).openInputStream(uri);
-                yourDrawable = Drawable.createFromStream(inputStream, uri.toString());
-                binding.detailScreen.setBackground(yourDrawable);
-            } catch (FileNotFoundException e) {
-                binding.detailScreen.setBackgroundColor(0x00000000);
+                InputStream stream = getContext().getContentResolver().openInputStream(uri);
+                Drawable drawable = Drawable.createFromStream(stream, uri.toString());
+                binding.detailScreen.setBackground(drawable);
+            } catch (Exception ignored) {
             }
         });
     }
@@ -111,10 +105,6 @@ public class DetailedWeatherFragment extends Fragment {
                 imagePickerLauncher.launch("image/*");
             });
         });
-    }
-
-    static public ContentResolver tryGetContentResolver(Context c) {
-        return c.getContentResolver();
     }
 }
 
