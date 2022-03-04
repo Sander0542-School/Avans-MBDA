@@ -27,15 +27,13 @@ public class DetailedWeatherActivity extends AppCompatActivity {
     public static final String NAME_ONE_CALL = "OneCall";
     public static final String NAME_SELECTED_ITEM = "SelectedItem";
 
-    private ActivityDetailedWeatherBinding binding;
-
     private ForecastViewModel viewModel;
     private BackgroundUtil backgroundUtil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityDetailedWeatherBinding.inflate(getLayoutInflater());
+        nl.avans.mbda.weatherapp.databinding.ActivityDetailedWeatherBinding binding = ActivityDetailedWeatherBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         backgroundUtil = new BackgroundUtil(this, binding.getRoot());
