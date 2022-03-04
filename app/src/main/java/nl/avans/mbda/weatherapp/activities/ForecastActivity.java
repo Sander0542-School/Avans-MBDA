@@ -41,7 +41,7 @@ public class ForecastActivity extends AppCompatActivity {
 
     private DetailedWeatherFragment detailedWeatherFragment;
     private BackgroundUtil backgroundUtil;
-    private boolean mDualPanel = false;
+    private boolean dualPanel = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +59,7 @@ public class ForecastActivity extends AppCompatActivity {
         viewModel.getRefreshing().observe(this, this::refreshForecast);
 
         if (binding.content.frameDetailedWeather != null) {
-            mDualPanel = true;
+            dualPanel = true;
 
             if (savedInstanceState == null) {
                 detailedWeatherFragment = new DetailedWeatherFragment();
@@ -103,7 +103,7 @@ public class ForecastActivity extends AppCompatActivity {
     }
 
     public void daySelected(Integer selectedItem) {
-        if (!mDualPanel) {
+        if (!dualPanel) {
             try {
                 Intent intent = new Intent(this, DetailedWeatherActivity.class);
                 intent.putExtra(DetailedWeatherActivity.NAME_ONE_CALL, Converter.toJsonString(viewModel.getOneCall().getValue()));
