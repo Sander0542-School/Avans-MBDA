@@ -17,4 +17,6 @@
     <string name="description_weather_icon">Weer Icoon</string>
     <string name="menu_maps">Openen in kaarten</string>
     <string name="menu_background">Achtergrond veranderen</string>
+    <string name="no_internet">Geen internet</string>
+    <string name="not_loaded">De gevens konden niet worden opgehaald, probeer het opnieuw</string>
 </resources>
