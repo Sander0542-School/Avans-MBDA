@@ -13,12 +13,10 @@ import nl.avans.mbda.weatherapp.fragments.SettingsFragment;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    private ActivitySettingsBinding binding;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivitySettingsBinding.inflate(getLayoutInflater());
+        nl.avans.mbda.weatherapp.databinding.ActivitySettingsBinding binding = ActivitySettingsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         if (savedInstanceState == null) {

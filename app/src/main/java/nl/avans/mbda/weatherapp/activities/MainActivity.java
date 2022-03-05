@@ -31,8 +31,6 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = MainActivity.class.getName();
 
-    private ActivityMainBinding binding;
-
     private CancellationTokenSource cancellationSource;
 
     private FusedLocationProviderClient fusedLocationClient;
@@ -44,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        nl.avans.mbda.weatherapp.databinding.ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         cancellationSource = new CancellationTokenSource();
