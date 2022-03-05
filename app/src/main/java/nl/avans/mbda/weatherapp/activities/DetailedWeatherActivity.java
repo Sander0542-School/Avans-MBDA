@@ -1,7 +1,5 @@
 package nl.avans.mbda.weatherapp.activities;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import java.io.IOException;
-import java.util.Locale;
 
 import nl.avans.mbda.weatherapp.R;
 import nl.avans.mbda.weatherapp.common.utils.BackgroundUtil;
@@ -27,15 +24,13 @@ public class DetailedWeatherActivity extends AppCompatActivity {
     public static final String NAME_ONE_CALL = "OneCall";
     public static final String NAME_SELECTED_ITEM = "SelectedItem";
 
-    private ActivityDetailedWeatherBinding binding;
-
     private ForecastViewModel viewModel;
     private BackgroundUtil backgroundUtil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityDetailedWeatherBinding.inflate(getLayoutInflater());
+        nl.avans.mbda.weatherapp.databinding.ActivityDetailedWeatherBinding binding = ActivityDetailedWeatherBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         backgroundUtil = new BackgroundUtil(this, binding.getRoot());

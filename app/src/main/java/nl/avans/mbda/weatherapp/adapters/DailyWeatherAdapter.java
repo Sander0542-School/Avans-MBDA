@@ -16,7 +16,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import nl.avans.mbda.weatherapp.R;
 import nl.avans.mbda.weatherapp.common.Formats;
 import nl.avans.mbda.weatherapp.databinding.ItemDailyWeatherBinding;
 import nl.avans.mbda.weatherapp.models.onecall.Daily;

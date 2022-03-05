@@ -33,22 +33,19 @@ public class ForecastActivity extends AppCompatActivity {
     public static final String NAME_LATITUDE = "latitude";
     public static final String NAME_LONGITUDE = "longitude";
 
-    private ActivityForecastBinding binding;
-
     private double latitude;
     private double longitude;
 
     private ForecastViewModel viewModel;
     private OpenWeatherMap openWeatherMap;
 
-    private DetailedWeatherFragment detailedWeatherFragment;
     private BackgroundUtil backgroundUtil;
-    private boolean mDualPanel = false;
+    private boolean dualPanel = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityForecastBinding.inflate(getLayoutInflater());
+        nl.avans.mbda.weatherapp.databinding.ActivityForecastBinding binding = ActivityForecastBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         backgroundUtil = new BackgroundUtil(this, binding.getRoot());
@@ -61,10 +58,10 @@ public class ForecastActivity extends AppCompatActivity {
         viewModel.getRefreshing().observe(this, this::refreshForecast);
 
         if (binding.content.frameDetailedWeather != null) {
-            mDualPanel = true;
+            dualPanel = true;
 
             if (savedInstanceState == null) {
-                detailedWeatherFragment = new DetailedWeatherFragment();
+                DetailedWeatherFragment detailedWeatherFragment = new DetailedWeatherFragment();
 
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                 transaction.add(R.id.frame_detailed_weather, detailedWeatherFragment, "frag_detail");
@@ -105,7 +102,7 @@ public class ForecastActivity extends AppCompatActivity {
     }
 
     public void daySelected(Integer selectedItem) {
-        if (!mDualPanel) {
+        if (!dualPanel) {
             try {
                 Intent intent = new Intent(this, DetailedWeatherActivity.class);
                 intent.putExtra(DetailedWeatherActivity.NAME_ONE_CALL, Converter.toJsonString(viewModel.getOneCall().getValue()));
