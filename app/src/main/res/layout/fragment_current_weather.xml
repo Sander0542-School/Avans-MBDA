@@ -16,10 +16,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="84dp"
-            android:text="@string/weather_temp"
             android:textSize="48sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/weather_temp" />
 
         <TextView
             android:id="@+id/weather_location"
@@ -85,10 +85,10 @@
             android:id="@+id/location_lat_lon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginBottom="8dp"
             tools:text="@string/location_lat_lon" />
 
         <Button

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -19,6 +20,7 @@ import nl.avans.mbda.weatherapp.common.Constants;
 import nl.avans.mbda.weatherapp.common.apis.OpenWeatherMap;
 import nl.avans.mbda.weatherapp.common.utils.BackgroundUtil;
 import nl.avans.mbda.weatherapp.common.utils.MenuUtil;
+import nl.avans.mbda.weatherapp.common.utils.NetworkUtil;
 import nl.avans.mbda.weatherapp.databinding.ActivityForecastBinding;
 import nl.avans.mbda.weatherapp.fragments.DetailedWeatherFragment;
 import nl.avans.mbda.weatherapp.viewmodels.ForecastViewModel;
@@ -120,9 +122,18 @@ public class ForecastActivity extends AppCompatActivity {
     }
 
     private void requestOneCall() {
-        openWeatherMap.OneCall(latitude, longitude, oneCall -> {
-            viewModel.setOneCall(oneCall);
+        if (NetworkUtil.isConnected(this)) {
+            openWeatherMap.OneCall(latitude, longitude, oneCall -> {
+                viewModel.setOneCall(oneCall);
+                viewModel.setRefreshing(false);
+            }, error -> {
+                viewModel.setRefreshing(false);
+                Toast.makeText(this, getString(R.string.not_loaded), Toast.LENGTH_LONG).show();
+                Log.e(TAG, error.getMessage(), error.getCause());
+            });
+        } else {
             viewModel.setRefreshing(false);
-        }, error -> Log.e(TAG, error.getMessage(), error.getCause()));
+            Toast.makeText(this, getString(R.string.no_internet), Toast.LENGTH_LONG).show();
+        }
     }
 }

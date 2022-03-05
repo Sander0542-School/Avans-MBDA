@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,12 +25,15 @@ import com.google.android.gms.tasks.CancellationTokenSource;
 import nl.avans.mbda.weatherapp.R;
 import nl.avans.mbda.weatherapp.common.Constants;
 import nl.avans.mbda.weatherapp.common.apis.OpenWeatherMap;
+import nl.avans.mbda.weatherapp.common.utils.NetworkUtil;
 import nl.avans.mbda.weatherapp.databinding.ActivityMainBinding;
 import nl.avans.mbda.weatherapp.viewmodels.WeatherViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = MainActivity.class.getName();
+
+    private ActivityMainBinding binding;
 
     private CancellationTokenSource cancellationSource;
 
@@ -42,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        nl.avans.mbda.weatherapp.databinding.ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         cancellationSource = new CancellationTokenSource();
@@ -52,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
 
         viewModel = new ViewModelProvider(this).get(WeatherViewModel.class);
         viewModel.getRefreshing().observe(this, this::refreshWeather);
+
+        binding.noInternet.setOnRefreshListener(() -> refreshWeather(true));
 
         setSupportActionBar(binding.toolbar);
 
@@ -83,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void refreshWeather(Boolean refreshing) {
+        binding.noInternet.setRefreshing(refreshing);
         if (refreshing) {
             if (preferences.getBoolean("current_location", false) && ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 fusedLocationClient.getCurrentLocation(LocationRequest.PRIORITY_HIGH_ACCURACY, cancellationSource.getToken()).addOnSuccessListener(location -> {
@@ -110,9 +117,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void requestWeather(double lat, double lon) {
-        openWeatherMap.Current(lat, lon, current -> {
-            viewModel.setCurrent(current);
+        if (NetworkUtil.isConnected(this)) {
+            binding.noInternet.setVisibility(View.GONE);
+            binding.fragmentCurrentWeather.setVisibility(View.VISIBLE);
+            openWeatherMap.Current(lat, lon, current -> {
+                viewModel.setCurrent(current);
+                viewModel.setRefreshing(false);
+            }, error -> {
+                viewModel.setRefreshing(false);
+                Toast.makeText(this, getString(R.string.not_loaded), Toast.LENGTH_LONG).show();
+                Log.e(TAG, error.getMessage(), error.getCause());
+            });
+        } else {
+            binding.fragmentCurrentWeather.setVisibility(View.GONE);
+            binding.noInternet.setVisibility(View.VISIBLE);
             viewModel.setRefreshing(false);
-        }, error -> Log.e(TAG, error.getMessage(), error.getCause()));
+        }
     }
 }
