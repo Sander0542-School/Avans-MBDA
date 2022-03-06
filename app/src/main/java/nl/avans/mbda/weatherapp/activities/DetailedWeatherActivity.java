@@ -30,7 +30,7 @@ public class DetailedWeatherActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        nl.avans.mbda.weatherapp.databinding.ActivityDetailedWeatherBinding binding = ActivityDetailedWeatherBinding.inflate(getLayoutInflater());
+        ActivityDetailedWeatherBinding binding = ActivityDetailedWeatherBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         backgroundUtil = new BackgroundUtil(this, binding.getRoot());
