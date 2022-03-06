@@ -66,10 +66,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+
+        if (cancellationSource == null) {
+            cancellationSource = new CancellationTokenSource();
+        }
+    }
+
+    @Override
     protected void onStop() {
         super.onStop();
 
         cancellationSource.cancel();
+        cancellationSource = null;
     }
 
     @Override
@@ -98,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
                     } else {
                         requestWeather();
                     }
-                });
+                }).addOnFailureListener(runnable -> requestWeather());
             } else {
                 requestWeather();
             }
